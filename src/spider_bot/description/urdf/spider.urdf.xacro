@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot_name">
+          <link name="world" />
+    
+    <joint name="virtual_joint" type="fixed">
+            <origin rpy="0 -3.15 0" xyz="0 0 0.3" />
+
+     <parent link="world"/>
+     <child link="base"/>
+   </joint>
+
+    <link name="base">
+        <visual>
+            <geometry>
+                <mesh filename="package://spider_bot/description/meshes/visual/base.dae" scale="0.0050 0.0050 0.0050" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://spider_bot/description/meshes/collision/base.stl " scale="0.0050 0.0050 0.0050" />
+            </geometry>
+        </collision>
+        
+        <inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+
+
+     <link name="elbow_link1">
+        <visual>
+            <geometry>
+                <mesh filename="package://spider_bot/description/meshes/visual/elbow.dae" scale="0.0050 0.0050 0.0050" />
+            </geometry>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://spider_bot/description/meshes/collision/elbow.stl " scale="0.0050 0.0050 0.0050" />
+            </geometry>
+        </collision>
+        
+<inertial>
+            <mass value="0.1" />
+            <inertia ixx="0.03" iyy="0.03" izz="0.03" ixy="0.0" ixz="0.0" iyz="0.0" />
+        </inertial>
+
+    </link>
+
+ <joint name="elbow_joint1" type="revolute">
+        <!-- <safety_controller k_position="100.0" k_velocity="40.0" soft_lower_limit="-2.8973" soft_upper_limit="2.8973" /> -->
+        <origin rpy="0 3 0" xyz="0 1.5 0.1" />
+        <parent link="base" />
+        <child link="elbow_link1" />
+        <axis xyz="0 0 1" />
+        <limit effort="87" lower="-2.9671" upper="2.9671" velocity="2.3925" />
+    </joint>
+
+
+</robot>
